@@ -1,7 +1,16 @@
 class ReviewsController < ApplicationController
-    def index 
-        render json: Review.all, status: :ok
-    end 
+    before_action :redirect_if_not_logged_in
+    skip_before_action :redirect_if_not_logged_in, only: [:index, :show]
+
+ def index
+    if params[:user_id]
+      @reviews = Review.where(user_id: params[:user_id]).order_by_date
+    elsif params[:recipe_id]
+      @reviews = Review.where(recipe_id: params[:recipe_id]).order_by_date
+    else
+      @reviews = Review.order_by_recipe
+    end
+  end
 
     def show
         review = Review.find(params[:id])
@@ -28,6 +37,6 @@ class ReviewsController < ApplicationController
     private
     
     def review_params
-        params.permit(:rating, :review_body)
+        params.permit(:rating, :review_body, :book_id)
     end
 end

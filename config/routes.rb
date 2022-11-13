@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   
-  resources :book_clubs, only [:show, :create]
+  resources :book_clubs, only: [:show, :create]
   resources :reviews, only: [:index, :show, :create, :update, :destroy]
   resources :books, only: [:index, :show]
   post "/login", to: "sessions#create" 

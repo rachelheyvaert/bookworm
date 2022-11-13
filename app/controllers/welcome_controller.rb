@@ -1,5 +1,5 @@
 class WelcomeController < ApplicationController
     def home 
-        @books = Book.random_books(4)
+        @books = Book.all
     end
 end

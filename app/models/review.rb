@@ -4,5 +4,5 @@ class Review < ApplicationRecord
 
   validates :rating, numericality: {greater_than: 0}
   validates :rating, numericality: {less_than: 6}
-  validates :review_body, presence: true
+  validates :review_body, presence: true, length: {maximum: 500}
 end

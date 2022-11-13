@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_12_172503) do
+ActiveRecord::Schema.define(version: 2022_11_13_125405) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "book_club_books", force: :cascade do |t|
+    t.bigint "book_id", null: false
+    t.bigint "book_club_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["book_club_id"], name: "index_book_club_books_on_book_club_id"
+    t.index ["book_id"], name: "index_book_club_books_on_book_id"
+  end
 
   create_table "book_clubs", force: :cascade do |t|
     t.string "name"
@@ -30,15 +39,6 @@ ActiveRecord::Schema.define(version: 2022_11_12_172503) do
     t.string "img_url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "libraries", force: :cascade do |t|
-    t.bigint "book_club_id", null: false
-    t.bigint "book_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["book_club_id"], name: "index_libraries_on_book_club_id"
-    t.index ["book_id"], name: "index_libraries_on_book_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -61,8 +61,8 @@ ActiveRecord::Schema.define(version: 2022_11_12_172503) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "libraries", "book_clubs"
-  add_foreign_key "libraries", "books"
+  add_foreign_key "book_club_books", "book_clubs"
+  add_foreign_key "book_club_books", "books"
   add_foreign_key "reviews", "books"
   add_foreign_key "reviews", "users"
 end

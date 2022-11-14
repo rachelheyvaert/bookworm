@@ -3,20 +3,25 @@ class SessionsController < ApplicationController
     def new
         @user = User.new
     end
-
     def create
-        @user = User.find_by(email: log_in_params["email"])
-        if @user.nil?
-          redirect_to '/login', alert: "Are you sure you have an account?"
-        else @user.present?
-          if @user.authenticate(log_in_params[:password])
-            session[:user_id] = @user.id
-            redirect_to user_path(@user)
-          else
-            redirect_to '/login', alert: "There was an error signing in."
-          end
-        end
+      user = User.find_by(username: params[:username])
+      session[:user_id] = user.id
+      render json: user
     end
+
+    # def create
+    #     @user = User.find_by(email: log_in_params["email"])
+    #     if @user.nil?
+    #       redirect_to '/login', alert: "Are you sure you have an account?"
+    #     else @user.present?
+    #       if @user.authenticate(log_in_params[:password])
+    #         session[:user_id] = @user.id
+    #         redirect_to user_path(@user)
+    #       else
+    #         redirect_to '/login', alert: "There was an error signing in."
+    #       end
+    #     end
+    # end
 
     def destroy
         session.delete :user_id

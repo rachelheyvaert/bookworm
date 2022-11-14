@@ -2,7 +2,7 @@
 import './App.css';
 import { useEffect, useState } from 'react';
 import Login from './components/Login';
-import Navigation from './components/Navigation';
+// import Navigation from './components/Navigation';
 function App() {
 
 const [user, setUser] = useState(null);
@@ -20,7 +20,6 @@ const [user, setUser] = useState(null);
   } else {
     return (
     <div>
-      <Navigation />
     <Login onLogin={setUser} />
       </div>);
   }

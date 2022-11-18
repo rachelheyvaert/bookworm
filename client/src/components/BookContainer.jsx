@@ -6,4 +6,4 @@ const BookContainer = () => {
   )
 }
 
-export default BookContainer
+export default BookContainer;

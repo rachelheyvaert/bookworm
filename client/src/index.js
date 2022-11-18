@@ -3,8 +3,6 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {jsx, css, Global, ClassNames} from '@emotion/react';
-
 
 ReactDOM.render(
   <React.StrictMode>

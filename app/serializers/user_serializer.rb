@@ -1,7 +1,5 @@
 class UserSerializer < ActiveModel::Serializer
   attributes :id, :username, :password_digest, :email
-  has_many :books
-  belongs_to :book_club
   has_many :reviews
 
   

@@ -10,25 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_13_125405) do
+ActiveRecord::Schema.define(version: 2022_11_12_153332) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "book_club_books", force: :cascade do |t|
-    t.bigint "book_id", null: false
-    t.bigint "book_club_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["book_club_id"], name: "index_book_club_books_on_book_club_id"
-    t.index ["book_id"], name: "index_book_club_books_on_book_id"
-  end
-
-  create_table "book_clubs", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
 
   create_table "books", force: :cascade do |t|
     t.string "title"
@@ -56,13 +41,10 @@ ActiveRecord::Schema.define(version: 2022_11_13_125405) do
     t.string "username"
     t.string "password_digest"
     t.string "email"
-    t.integer "book_club_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "book_club_books", "book_clubs"
-  add_foreign_key "book_club_books", "books"
   add_foreign_key "reviews", "books"
   add_foreign_key "reviews", "users"
 end

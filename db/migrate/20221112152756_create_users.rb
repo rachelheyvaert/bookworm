@@ -4,7 +4,6 @@ class CreateUsers < ActiveRecord::Migration[6.1]
       t.string :username, unique: true
       t.string :password_digest
       t.string :email, unique: true
-      t.integer :book_club_id
       t.timestamps
     end
   end

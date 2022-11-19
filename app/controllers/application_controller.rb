@@ -1,7 +1,16 @@
 class ApplicationController < ActionController::API
   include ActionController::Cookies
 
-   def redirect_if_not_logged_in
-        redirect_to '/', alert: "Please log in or create and account." unless logged_in?
-    end
+  rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
+  rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
+
+  private
+
+  def render_unprocessable_entity(invalid)
+      render json: {errors: invalid.record.errors}, status: :unprocessable_entity
+  end 
+
+   def render_not_found(error)
+      render json: {errors: {error.model => "Not Found"}}, status: :not_found
+  end 
 end
